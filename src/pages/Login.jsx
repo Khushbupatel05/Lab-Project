@@ -11,11 +11,11 @@ const Login = () => {
   const {user, handleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (user) {
-  //     navigate("/")
-  //   }
-  // }, [user])
+  useEffect(() => {
+    if (user) {
+      navigate("/")
+    }
+  }, [user])
 
   const handleSubmit = async (e) => {
     e.preventDefault();

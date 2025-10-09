@@ -1,13 +1,13 @@
 import { createContext } from "react"
 
-export const LanContext = createContext();
+export const LabContext = createContext();
 
 const LabContextProvider = ({children}) => {
     const value = {}
   return (
-    <LabContextProvider value={value}>
+    <LabContext.Provider value={value}>
       {children}
-    </LabContextProvider>
+    </LabContext.Provider>
   )
 }
 
