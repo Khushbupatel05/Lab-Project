@@ -4,7 +4,13 @@ import Login from './pages/Login'
 import ProtectedRoutes from './components/ProtectedRoutes'
 import { ToastContainer } from 'react-toastify'
 import { Header } from './components/Header'
-import Labs from './pages/Labs'
+import LabList from './pages/Labs/LabList'
+import AddNewLab from './pages/Labs/AddNewLab'
+import PcList from './pages/Pcs/PcList'
+import AddNewPc from './pages/Pcs/AddNewPc'
+import StudentList from './pages/Student/StudentList'
+import AddNewStudents from './pages/Student/AddNewStudents'
+
 
 const App = () => {
   return (
@@ -13,10 +19,18 @@ const App = () => {
         <BrowserRouter>
           <Header />
           <Routes>
-            <Route path='/' element={<ProtectedRoutes Component={Dashboard}/>} />
-            {/* <Route path='/' element={<Dashboard />} /> */}
+            <Route path='/' element={<ProtectedRoutes Component={Dashboard} />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/labs' element={<Labs />} />
+
+            <Route path='/labs' element={<LabList />} />
+            <Route path="/add-lab" element={<ProtectedRoutes Component={AddNewLab} />} />
+
+            <Route path="/pcs" element={<ProtectedRoutes Component={PcList} />} />
+            <Route path="/add-pc" element={<ProtectedRoutes Component={AddNewPc} />} />
+
+            <Route path="/students" element={<ProtectedRoutes Component={StudentList} />} />
+            <Route path="/add-student" element={<ProtectedRoutes Component={AddNewStudents} s/>} />
+
           </Routes>
           <ToastContainer />
         </BrowserRouter>
