@@ -103,6 +103,7 @@ const StudentContextProvider = ({ children }) => {
     addStudent,
     fetchStudent,
     showPcName,
+    
     deleteStudent,
     updateStudent,
   };

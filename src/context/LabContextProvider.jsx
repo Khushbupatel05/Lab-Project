@@ -89,8 +89,13 @@ const LabContextProvider = ({ children }) => {
       toast.error("Failed to update lab. Check Firestore permissions.")
     }
   }
+  const showLabName = (labId) => {
+    if (!labs || labs.length === 0) return "Unassigned";
+    const lab = labs.find((lab) => lab.id === labId);
+    return lab ? lab.name : "Unassigned";
+  };
 
-  const value = { addLab, labs, deleteLab, updateLab, fetchLab }
+  const value = { addLab, labs, deleteLab, updateLab, fetchLab, showLabName, }
 
   return (
     <LabContext.Provider value={value}>

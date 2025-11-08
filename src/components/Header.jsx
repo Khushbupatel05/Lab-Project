@@ -1,47 +1,184 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { useContext, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { AuthContext } from "../context/AuthContextProvider";
+import { auth } from "../config/firebase";
+import { signOut } from "firebase/auth";
 
-export const Header = () => {
-    return (
+const Header = () => {
+  const { user } = useContext(AuthContext);
+  const { pathname } = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
 
-        <>
-            <header>
-                <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
-                    <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                        <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                            <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
-                            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
-                        </a>
-                        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                            <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
-                            <button data-collapse-toggle="navbar-sticky" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
-                                <span className="sr-only">Open main menu</span>
-                                <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M1 1h15M1 7h15M1 13h15" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-                            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                                    <li>
-                                        <Link to={'/'} className="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Dashboard</Link>
-                                    </li>
-                                    <li>
-                                        <Link to={'/labs'} className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Labs</Link>
-                                    </li>
-                                    <li>
-                                        <Link to={'/pcs'} className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Pcs</Link>
-                                    </li>
-                                    <li>
-                                        <Link to={'/students'} className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Students</Link>
-                                    </li>
-                                </ul>
-                        </div>
-                    </div>
-                </nav>
+  const logout = async () => {
+    await signOut(auth);
+  };
 
+  return (
+    <>
+      {pathname !== "/login" && (
+        <nav className="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-200">
+          <div className="max-w-screen-xl mx-auto flex items-center justify-between p-4 md:px-8">
+            {/* Logo */}
+            <Link
+              to="/"
+              className="flex items-center space-x-3 rtl:space-x-reverse"
+            >
+              <img
+                src="img/logo.png"
+                className="h-11"
+                alt="Lab Logo"
+              />
+              <span className="text-2xl font-bold text-[#0b2a97] tracking-wide">
+                ComputeHub
+              </span>
+            </Link>
 
-            </header>
-        </>
-    )
-}
+           
+            <ul className="hidden md:flex space-x-8 font-medium">
+              <li>
+                <Link
+                  to="/"
+                  className={`pb-1 transition-all duration-300 border-b-2 ${
+                    pathname === "/"
+                      ? "border-[#0b2a97] text-[#0b2a97]"
+                      : "border-transparent text-gray-700 hover:text-[#0b2a97]"
+                  }`}
+                >
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/labs"
+                  className={`pb-1 transition-all duration-300 border-b-2 ${
+                    ["/labs", "/add-lab", "/edit-lab"].includes(pathname)
+                      ? "border-[#0b2a97] text-[#0b2a97]"
+                      : "border-transparent text-gray-700 hover:text-[#0b2a97]"
+                  }`}
+                >
+                  Labs
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/pcs"
+                  className={`pb-1 transition-all duration-300 border-b-2 ${
+                    ["/pcs", "/add-pc", "/edit-pc"].includes(pathname)
+                      ? "border-[#0b2a97] text-[#0b2a97]"
+                      : "border-transparent text-gray-700 hover:text-[#0b2a97]"
+                  }`}
+                >
+                  PCs
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/students"
+                  className={`pb-1 transition-all duration-300 border-b-2 ${
+                    ["/students", "/add-student", "/edit-student"].includes(
+                      pathname
+                    )
+                      ? "border-[#0b2a97] text-[#0b2a97]"
+                      : "border-transparent text-gray-700 hover:text-[#0b2a97]"
+                  }`}
+                >
+                  Students
+                </Link>
+              </li>
+            </ul>
+
+      
+            <div className="hidden md:block">
+              {user ? (
+                <button
+                  onClick={logout}
+                  className="bg-gradient-to-r from-[#5c407a] to-[#af5a94] text-white font-medium rounded-full px-6 py-2.5 shadow-md hover:opacity-90 transition-all duration-300"
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  className="bg-gradient-to-r from-[#6A11CB] to-[#924972] text-white font-medium rounded-full px-6 py-2.5 shadow-md hover:opacity-90 transition-all duration-300"
+                >
+                  Login
+                </Link>
+              )}
+            </div>
+
+            
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              type="button"
+              className="inline-flex items-center p-2 ml-2 text-[#0b2a97] rounded-lg md:hidden hover:bg-gray-100 focus:outline-none"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                {isOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
+          </div>
+
+          {/* Mobile Menu */}
+          {isOpen && (
+            <div className="md:hidden px-4 pb-4 flex flex-col gap-2 bg-white text-[#0b2a97] shadow-inner border-t">
+              {[
+                { to: "/", label: "Home" },
+                { to: "/labs", label: "Labs" },
+                { to: "/pcs", label: "PCs" },
+                { to: "/students", label: "Students" },
+              ].map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className={`block py-2 px-5 font-semibold rounded-md transition-all duration-300 ${
+                    pathname === item.to
+                      ? "bg-blue-100 text-[#0b2a97]"
+                      : "hover:bg-blue-50"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+
+              {user ? (
+                <button
+                  onClick={logout}
+                  className="bg-gradient-to-r from-[#673478] to-[#822965] text-white font-medium rounded-full px-5 py-2.5 shadow-md hover:opacity-90 transition-all duration-300 mt-2"
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  className="bg-gradient-to-r from-[#763380] to-[#6f2259] text-white font-medium rounded-full px-5 py-2.5 shadow-md hover:opacity-90 transition-all duration-300 mt-2"
+                >
+                  Login
+                </Link>
+              )}
+            </div>
+          )}
+        </nav>
+      )}
+    </>
+  );
+};
+
+export default Header;

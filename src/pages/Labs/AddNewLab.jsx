@@ -42,39 +42,40 @@ const AddNewLab = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.name.trim() || !formData.capacity.trim() || !formData.location.trim()) {
+    if (
+      !formData.name.trim() ||
+      !String(formData.capacity).trim() ||
+      !formData.location.trim()
+    ) {
       toast.error("Please fill in all fields!");
       return;
     }
-
     if (editMode) {
-      await updateLab(labId, formData);
+      await updateLab(labId, { ...formData, capacity: Number(formData.capacity) });
     } else {
-      await addLab(formData);
+      await addLab({ ...formData, capacity: Number(formData.capacity) });
     }
 
     navigate("/labs");
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-gray-100 p-6">
-      <div className="relative w-full max-w-lg bg-white border border-gray-200 rounded-3xl shadow-xl p-10">
+    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-gray-100 p-6 ">
+      <div className="relative  max-w-lg bg-white border border-gray-200 rounded-3xl shadow-xl p-10 ">
         <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-indigo-50 to-pink-50 blur-3xl -z-10"></div>
 
         <h1 className="text-center text-3xl font-extrabold mb-8 text-gray-800 tracking-wide">
           {editMode ? "Update Laboratory Details" : "Create New Laboratory"}
         </h1>
 
-        <form onSubmit={handleSubmit} className="space-y-7">
-          <div className="relative">
-            <input
-              type="text"
+        <form onSubmit={handleSubmit} className="space-y-7 ">
+          <div className="relative ">
+            <input type="text"
               id="name"
               value={formData.name}
               onChange={handleChange}
               className="peer w-full bg-transparent border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:border-indigo-500 focus:outline-none py-3"
-              placeholder="Lab Name"
-            />
+              placeholder="Lab Name" />
             <label
               htmlFor="name"
               className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-indigo-500"
@@ -119,7 +120,7 @@ const AddNewLab = () => {
 
           <button
             type="submit"
-            className="w-full mt-4 py-3 text-lg font-semibold rounded-xl bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-indigo-500 text-white shadow-md transition-all duration-300 transform hover:scale-105"
+            className="w-full mt-4 py-3 text-lg font-semibold rounded-xl bg-gradient-to-r from-indigo-500 to-blue-800 hover:from-purple-700 hover:to-indigo-500 text-white shadow-md transition-all duration-300 transform hover:scale-105"
           >
             {editMode ? "Update Lab" : "Add Lab"}
           </button>

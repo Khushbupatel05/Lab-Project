@@ -13,12 +13,12 @@ const AddNewStudents = () => {
     labId: "",
     pcId: "",
   });
+
   const [filteredPc, setFilteredPc] = useState([]);
   const { labs } = useContext(LabContext);
-  const { pcs,  pcsList } = useContext(PcContext);
+  const { pcsList } = useContext(PcContext);
   const { addStudent } = useContext(StudentContext);
   const navigate = useNavigate();
-
 
   useEffect(() => {
     if (input.labId) {
@@ -27,7 +27,7 @@ const AddNewStudents = () => {
       );
       setFilteredPc(availablePcs);
     }
-  }, [input.labId, pcs]);
+  }, [input.labId, pcsList]);
 
   const handleChange = (e) => {
     setInput({ ...input, [e.target.id]: e.target.value });
@@ -36,15 +36,14 @@ const AddNewStudents = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-  
     if (
-      input.name.trim() === "" ||
-      input.email.trim() === "" ||
-      input.grid.trim() === "" ||
-      input.labId.trim() === "" ||
-      input.pcId.trim() === ""
+      !input.name.trim() ||
+      !input.email.trim() ||
+      !input.grid.trim() ||
+      !input.labId.trim() ||
+      !input.pcId.trim()
     ) {
-      toast.error("Enter all student details correctly!");
+      toast.error("Please fill in all student details!");
       return;
     }
 
@@ -60,67 +59,80 @@ const AddNewStudents = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-10">
-      <div className="bg-white shadow-lg rounded-2xl w-full max-w-lg p-8">
-        <h1 className="text-3xl font-bold text-center mb-8 text-black">
+    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-gray-100 p-6">
+      <div className="relative max-w-lg w-full bg-white border border-gray-200 rounded-3xl shadow-xl p-10">
+        <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-indigo-50 to-pink-50 blur-3xl -z-10"></div>
+
+        <h1 className="text-center text-3xl font-extrabold mb-8 text-gray-800 tracking-wide">
           Add New Student
         </h1>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Student Name */}
-          <div>
-            <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">
+        <form onSubmit={handleSubmit} className="space-y-7">
+      
+          <div className="relative">
+            <input  type="text" id="name"  value={input.name}  onChange={handleChange}  placeholder="Student Name"
+              className="peer w-full bg-transparent border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:border-indigo-500 focus:outline-none py-3"
+            />
+            <label
+              htmlFor="name"
+              className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all 
+              peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base 
+              peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-sm 
+              peer-focus:text-indigo-500"
+            >
               Student Name
             </label>
-            <input
-              onChange={handleChange}
-              value={input.name}
-              id="name"
-              placeholder="Enter student name"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
-            />
           </div>
 
-          {/* Email */}
-          <div>
-            <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">
-              Email
-            </label>
+       
+          <div className="relative">
             <input
-              onChange={handleChange}
-              value={input.email}
               type="email"
               id="email"
-              placeholder="Enter email"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
+              value={input.email}
+              onChange={handleChange}
+              placeholder="Email"
+              className="peer w-full bg-transparent border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:border-indigo-500 focus:outline-none py-3"
             />
+            <label
+              htmlFor="email"
+              className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all 
+              peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base 
+              peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-sm 
+              peer-focus:text-indigo-500"
+            >
+              Email
+            </label>
           </div>
 
-          {/* GR Number */}
-          <div>
-            <label htmlFor="grid" className="block mb-2 text-sm font-medium text-gray-900">
-              GR NO.
-            </label>
+         
+          <div className="relative">
             <input
-              onChange={handleChange}
-              value={input.grid}
               type="number"
               id="grid"
-              placeholder="Enter GR NO."
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
+              value={input.grid}
+              onChange={handleChange}
+              placeholder="GR Number"
+              className="peer w-full bg-transparent border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:border-indigo-500 focus:outline-none py-3"
             />
+            <label
+              htmlFor="grid"
+              className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all 
+              peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base 
+              peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-sm 
+              peer-focus:text-indigo-500"
+            >
+              GR Number
+            </label>
           </div>
 
-          {/* Lab Select */}
-          <div>
-            <label htmlFor="labId" className="block mb-2 text-sm font-medium text-gray-900">
-              Select Lab
-            </label>
+          
+          <div className="relative">
             <select
-              onChange={handleChange}
-              value={input.labId}
               id="labId"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
+              value={input.labId}
+              onChange={handleChange}
+              className="peer w-full bg-transparent border-b-2 border-gray-300 text-gray-900 focus:border-indigo-500 focus:outline-none py-3"
             >
               <option value="">Choose a Lab</option>
               {labs.map((lab) => (
@@ -129,15 +141,21 @@ const AddNewStudents = () => {
                 </option>
               ))}
             </select>
+            <label
+              htmlFor="labId"
+              className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all 
+              peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base 
+              peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-sm 
+              peer-focus:text-indigo-500" >
+              Select Lab
+            </label>
           </div>
 
-         
-          <div>
-            <label htmlFor="pcId" className="block mb-2 text-sm font-medium text-gray-900">
-              Select PC
-            </label>
-            <select  onChange={handleChange}  value={input.pcId}id="pcId"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5" >
+     
+          <div className="relative">
+            <select id="pcId" value={input.pcId} onChange={handleChange}
+              className="peer pt-4 w-full bg-transparent border-b-2 border-gray-300 text-gray-900 focus:border-indigo-500 focus:outline-none py-3"
+            >
               <option value="">Choose a PC</option>
               {filteredPc.map((pc) => (
                 <option key={pc.id} value={pc.id}>
@@ -145,17 +163,28 @@ const AddNewStudents = () => {
                 </option>
               ))}
             </select>
+            <label
+              htmlFor="pcId"
+              className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all 
+              peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base 
+              peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-sm 
+              peer-focus:text-indigo-500" >
+              Select PC
+            </label>
           </div>
 
+         
           <button
             type="submit"
-            className="w-full bg-black text-white font-semibold py-2.5 rounded-lg hover:bg-gray-800 transition"
+            className="w-full mt-4 py-3 text-lg font-semibold rounded-xl 
+            bg-gradient-to-r from-indigo-500 to-blue-800 hover:from-purple-700 hover:to-indigo-500 
+            text-white shadow-md transition-all duration-300 transform hover:scale-105"
           >
             Add Student
           </button>
         </form>
       </div>
-    </div>
+    </section>
   );
 };
 
