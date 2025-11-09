@@ -6,14 +6,7 @@ import { StudentContext } from "../../context/StudentContextProvider";
 import { toast } from "react-toastify";
 
 const AddNewStudents = () => {
-  const [input, setInput] = useState({
-    name: "",
-    email: "",
-    grid: "",
-    labId: "",
-    pcId: "",
-  });
-
+  const [input, setInput] = useState({ name: "", email: "",  grid: "",  labId: "",  pcId: "",});
   const [filteredPc, setFilteredPc] = useState([]);
   const { labs } = useContext(LabContext);
   const { pcsList } = useContext(PcContext);
@@ -36,13 +29,7 @@ const AddNewStudents = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      !input.name.trim() ||
-      !input.email.trim() ||
-      !input.grid.trim() ||
-      !input.labId.trim() ||
-      !input.pcId.trim()
-    ) {
+    if (!input.name.trim() || !input.email.trim() || !input.grid.trim() || !input.labId.trim() ||  !input.pcId.trim()) {
       toast.error("Please fill in all student details!");
       return;
     }
@@ -73,66 +60,41 @@ const AddNewStudents = () => {
             <input  type="text" id="name"  value={input.name}  onChange={handleChange}  placeholder="Student Name"
               className="peer w-full bg-transparent border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:border-indigo-500 focus:outline-none py-3"
             />
-            <label
-              htmlFor="name"
-              className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all 
+            <label  htmlFor="name" className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all 
               peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base 
               peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-sm 
-              peer-focus:text-indigo-500"
-            >
+              peer-focus:text-indigo-500" >
               Student Name
             </label>
           </div>
 
        
           <div className="relative">
-            <input
-              type="email"
-              id="email"
-              value={input.email}
-              onChange={handleChange}
-              placeholder="Email"
+            <input  type="email" id="email" value={input.email} onChange={handleChange}  placeholder="Email"
               className="peer w-full bg-transparent border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:border-indigo-500 focus:outline-none py-3"
             />
-            <label
-              htmlFor="email"
-              className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all 
+            <label htmlFor="email" className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all 
               peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base 
               peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-sm 
-              peer-focus:text-indigo-500"
-            >
+              peer-focus:text-indigo-500" >
               Email
             </label>
           </div>
 
          
           <div className="relative">
-            <input
-              type="number"
-              id="grid"
-              value={input.grid}
-              onChange={handleChange}
-              placeholder="GR Number"
+            <input type="number" id="grid" value={input.grid} onChange={handleChange} placeholder="GR Number"
               className="peer w-full bg-transparent border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:border-indigo-500 focus:outline-none py-3"
             />
-            <label
-              htmlFor="grid"
-              className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all 
-              peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base 
-              peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-sm 
-              peer-focus:text-indigo-500"
-            >
+            <label htmlFor="grid" className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all   peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base 
+              peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-sm  peer-focus:text-indigo-500" >
               GR Number
             </label>
           </div>
 
           
           <div className="relative">
-            <select
-              id="labId"
-              value={input.labId}
-              onChange={handleChange}
-              className="peer w-full bg-transparent border-b-2 border-gray-300 text-gray-900 focus:border-indigo-500 focus:outline-none py-3"
+            <select id="labId" value={input.labId} onChange={handleChange} className="peer w-full bg-transparent border-b-2 border-gray-300 text-gray-900 focus:border-indigo-500 focus:outline-none py-3"
             >
               <option value="">Choose a Lab</option>
               {labs.map((lab) => (
@@ -141,12 +103,8 @@ const AddNewStudents = () => {
                 </option>
               ))}
             </select>
-            <label
-              htmlFor="labId"
-              className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all 
-              peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base 
-              peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-sm 
-              peer-focus:text-indigo-500" >
+            <label  htmlFor="labId" className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all  peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base 
+              peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-sm   peer-focus:text-indigo-500" >
               Select Lab
             </label>
           </div>
@@ -163,23 +121,15 @@ const AddNewStudents = () => {
                 </option>
               ))}
             </select>
-            <label
-              htmlFor="pcId"
-              className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all 
-              peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base 
-              peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-sm 
-              peer-focus:text-indigo-500" >
+            <label htmlFor="pcId"  className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all  peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base 
+              peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-sm  peer-focus:text-indigo-500" >
               Select PC
             </label>
           </div>
 
          
-          <button
-            type="submit"
-            className="w-full mt-4 py-3 text-lg font-semibold rounded-xl 
-            bg-gradient-to-r from-indigo-500 to-blue-800 hover:from-purple-700 hover:to-indigo-500 
-            text-white shadow-md transition-all duration-300 transform hover:scale-105"
-          >
+          <button  type="submit" className="w-full mt-4 py-3 text-lg font-semibold rounded-xl   bg-gradient-to-r from-indigo-500 to-blue-800 hover:from-purple-700 hover:to-indigo-500 
+            text-white shadow-md transition-all duration-300 transform hover:scale-105" >
             Add Student
           </button>
         </form>

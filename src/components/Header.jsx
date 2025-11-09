@@ -18,16 +18,9 @@ const Header = () => {
       {pathname !== "/login" && (
         <nav className="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-200">
           <div className="max-w-screen-xl mx-auto flex items-center justify-between p-4 md:px-8">
-            {/* Logo */}
-            <Link
-              to="/"
-              className="flex items-center space-x-3 rtl:space-x-reverse"
-            >
-              <img
-                src="img/logo.png"
-                className="h-11"
-                alt="Lab Logo"
-              />
+          
+            <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse" >
+              <img src="img/logo.png" className="h-11"  alt="Lab Logo" />
               <span className="text-2xl font-bold text-[#0b2a97] tracking-wide">
                 ComputeHub
               </span>
@@ -36,10 +29,7 @@ const Header = () => {
            
             <ul className="hidden md:flex space-x-8 font-medium">
               <li>
-                <Link
-                  to="/"
-                  className={`pb-1 transition-all duration-300 border-b-2 ${
-                    pathname === "/"
+                <Link to="/"  className={`pb-1 transition-all duration-300 border-b-2 ${   pathname === "/"
                       ? "border-[#0b2a97] text-[#0b2a97]"
                       : "border-transparent text-gray-700 hover:text-[#0b2a97]"
                   }`}
@@ -92,14 +82,14 @@ const Header = () => {
               {user ? (
                 <button
                   onClick={logout}
-                  className="bg-gradient-to-r from-[#5c407a] to-[#af5a94] text-white font-medium rounded-full px-6 py-2.5 shadow-md hover:opacity-90 transition-all duration-300"
+                  className="bg-gradient-to-r from-[#34468f] to-[#2719c7] text-white font-medium rounded-full px-6 py-2.5 shadow-md hover:opacity-90 transition-all duration-300"
                 >
                   Logout
                 </button>
               ) : (
                 <Link
                   to="/login"
-                  className="bg-gradient-to-r from-[#6A11CB] to-[#924972] text-white font-medium rounded-full px-6 py-2.5 shadow-md hover:opacity-90 transition-all duration-300"
+                  className="bg-gradient-to-r from-[#34468f] to-[#2719c7] text-white font-medium rounded-full px-6 py-2.5 shadow-md hover:opacity-90 transition-all duration-300"
                 >
                   Login
                 </Link>
@@ -107,36 +97,14 @@ const Header = () => {
             </div>
 
             
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              type="button"
+            <button onClick={() => setIsOpen(!isOpen)} type="button"
               className="inline-flex items-center p-2 ml-2 text-[#0b2a97] rounded-lg md:hidden hover:bg-gray-100 focus:outline-none"
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                {isOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
-              </svg>
+             
             </button>
           </div>
 
-          {/* Mobile Menu */}
+        
           {isOpen && (
             <div className="md:hidden px-4 pb-4 flex flex-col gap-2 bg-white text-[#0b2a97] shadow-inner border-t">
               {[

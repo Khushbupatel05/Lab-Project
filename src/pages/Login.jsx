@@ -41,58 +41,35 @@ const Login = () => {
           </h2>
 
           <div className="text-left mb-5">
-            <label
-              htmlFor="email"
-              className="block mb-2 text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-700" >
               Email
             </label>
-            <input
-              type="email"
-              id="email"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#1b1e7b] focus:border-[#1b1e7b] block w-full p-2.5"
-              placeholder="admin@gmail.com"
-              required
-              value={input.email}
-              onChange={(e) =>
-                setInput({ ...input, [e.target.id]: e.target.value })
-              }
+            <input type="email"  id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#1b1e7b] focus:border-[#1b1e7b] block w-full p-2.5"
+              placeholder="admin@gmail.com" required value={input.email} onChange={(e) =>
+                setInput({ ...input, [e.target.id]: e.target.value }) }
             />
           </div>
 
           <div className="text-left mb-5">
-            <label
-              htmlFor="password"
-              className="block mb-2 text-sm font-medium text-gray-700"
-            >
+            <label  htmlFor="password" className="block mb-2 text-sm font-medium text-gray-700" >
               Password
             </label>
-            <input
-              type="password"
-              id="password"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#1b1e7b] focus:border-[#1b1e7b] block w-full p-2.5"
-              placeholder="••••••••"
-              required
-              value={input.password}
-              onChange={(e) =>
-                setInput({ ...input, [e.target.id]: e.target.value })
-              }
+            <input type="password" id="password"  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#1b1e7b] focus:border-[#1b1e7b] block w-full p-2.5"
+              placeholder="••••••••"  required value={input.password} onChange={(e) =>
+                setInput({ ...input, [e.target.id]: e.target.value }) }
             />
           </div>
 
           <div className="text-right mb-5 text-sm">
-            <button
-              onClick={handleForgotClick}
-              className="text-[#6A11CB] hover:underline"
-              type="button"
-            >
+            <button  onClick={handleForgotClick} className="text-[#1117cb] hover:underline"
+              type="button" >
               Forgot Password?
             </button>
           </div>
 
           <button
             type="submit"
-            className="w-full text-white bg-gradient-to-r from-[#D4145A] to-[#6A11CB] hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-purple-300 font-semibold rounded-lg text-sm px-5 py-2.5 transition-all duration-300"
+            className="w-full text-white bg-gradient-to-r from-[#15056b] to-[#2108d8] hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-purple-300 font-semibold rounded-lg text-sm px-5 py-2.5 transition-all duration-300"
           >
             Login
           </button>

@@ -18,7 +18,7 @@ const AddNewPc = () => {
   const navigate = useNavigate();
   const { pcId } = useParams();
 
-  // Fetch PC data for editing
+ 
   useEffect(() => {
     if (pcId) loadPc();
   }, [pcId]);
@@ -65,7 +65,7 @@ const AddNewPc = () => {
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-gray-100 p-6">
       <div className="relative max-w-lg w-full bg-white border border-gray-200 rounded-3xl shadow-xl p-10 overflow-hidden">
-        {/* Soft background glow */}
+        
         <div className="absolute inset-0 bg-gradient-to-tr from-indigo-50 to-pink-50 blur-3xl -z-10 rounded-3xl"></div>
 
         <h1 className="text-center text-3xl font-extrabold mb-10 text-gray-800 tracking-wide">
@@ -73,18 +73,12 @@ const AddNewPc = () => {
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-8">
-          {/* PC Name */}
+       
           <div className="relative">
-            <input
-              type="text"
-              id="name"
-              value={input.name}
-              onChange={handleChange}
-              placeholder="PC Name"
+            <input type="text" id="name" value={input.name} onChange={handleChange} placeholder="PC Name"
               className="peer w-full bg-transparent border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:border-indigo-500 focus:outline-none py-3"
             />
-            <label
-              htmlFor="name"
+            <label  htmlFor="name"
               className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all 
               peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base 
               peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-sm 
@@ -94,11 +88,9 @@ const AddNewPc = () => {
             </label>
           </div>
 
-          {/* Lab Selection */}
+          
           <div className="relative">
-            <select
-              id="labId"
-              value={input.labId}
+            <select id="labId" value={input.labId}
               onChange={handleChange}
               className="peer w-full bg-transparent border-b-2 border-gray-300 text-gray-900 focus:border-indigo-500 focus:outline-none py-3"
             >
@@ -123,7 +115,6 @@ const AddNewPc = () => {
             </label>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full mt-6 py-3 text-lg font-semibold rounded-xl 

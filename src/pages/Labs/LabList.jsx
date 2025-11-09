@@ -15,7 +15,7 @@ const LabList = () => {
         </h1>
         <button
           onClick={() => navigate("/add-lab")}
-          className="bg-gradient-to-r from-[#8336e1] to-[#420682] hover:scale-105 transition-all text-white font-semibold px-6 py-2.5 rounded-lg shadow-md w-full md:w-auto"
+          className="bg-gradient-to-r from-[#363fe1] to-[#08116e] hover:scale-105 transition-all text-white font-semibold px-6 py-2.5 rounded-lg shadow-md w-full md:w-auto"
         >
           + Add Lab
         </button>

@@ -18,7 +18,7 @@ const PcList = () => {
         </h1>
         <button
           onClick={() => navigate("/add-pc")}
-          className="bg-gradient-to-r from-[#8840d4] to-[#420682] hover:scale-105 transition-all text-white font-semibold px-6 py-2.5 rounded-lg shadow-md w-full md:w-auto"
+          className="bg-gradient-to-r from-[#0f1f7c] to-[#140682] hover:scale-105 transition-all text-white font-semibold px-6 py-2.5 rounded-lg shadow-md w-full md:w-auto"
         >
           + Add PC
         </button>

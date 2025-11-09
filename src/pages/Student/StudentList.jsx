@@ -17,7 +17,7 @@ const StudentList = () => {
         </h1>
         <button
           onClick={() => navigate("/add-student")}
-          className="bg-gradient-to-r from-[#9d4d6a] to-[#893eda] hover:scale-105 transition-all text-white font-semibold px-6 py-2.5 rounded-lg shadow-md w-full md:w-auto"
+          className="bg-gradient-to-r from-[#4742b3] to-[#0c0774] hover:scale-105 transition-all text-white font-semibold px-6 py-2.5 rounded-lg shadow-md w-full md:w-auto"
         >
           + Add Student
         </button>
