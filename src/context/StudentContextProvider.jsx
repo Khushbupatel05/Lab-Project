@@ -42,18 +42,19 @@ const StudentContextProvider = ({ children }) => {
 
  
   const fetchStudent = async () => {
-    try {
-      const snapshot = await getDocs(collectionRef);
-      const allStudents = snapshot.docs.map((doc) => ({
-        studentId: doc.id,
-        ...doc.data(),
-      }));
-      setStudents(allStudents);
-    } catch (error) {
-      console.log(error);
-      toast.error("Something Went Wrong!");
-    }
-  };
+  try {
+    const snapshot = await getDocs(collectionRef);
+    const allStudents = snapshot.docs.map((doc) => ({
+      studentId: doc.id,   
+      ...doc.data(),
+    }));
+    setStudents(allStudents);
+  } catch (error) {
+    console.log(error);
+    toast.error("Something Went Wrong!");
+  }
+};
+
 
   const deleteStudent = async (studentId) => {
     try {
@@ -102,8 +103,7 @@ const StudentContextProvider = ({ children }) => {
     students,
     addStudent,
     fetchStudent,
-    showPcName,
-    
+    showPcName,   
     deleteStudent,
     updateStudent,
   };
