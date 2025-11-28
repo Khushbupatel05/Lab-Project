@@ -12,10 +12,9 @@ const PcContextProvider = ({ children }) => {
   const { labs, fetchLab } = useContext(LabContext);
 
   useEffect(() => {
-    loadPcs();
+    if (fetchPc) fetchPc();
   }, []);
 
-  
   const addPc = async (pcData) => {
     try {
       const pcObj = {
@@ -24,9 +23,9 @@ const PcContextProvider = ({ children }) => {
         status: "Available",
       };
       await addDoc(pcsCollectionRef, pcObj);
-      
+
       await updateDoc(doc(db, "labs", pcData.labId), { spaceLeft: increment(-1) });
-      loadPcs();
+      fetchPc();
       fetchLab();
       toast.success("PC added successfully!");
     } catch (error) {
@@ -35,22 +34,26 @@ const PcContextProvider = ({ children }) => {
     }
   };
 
-  
-  const loadPcs = async () => {
+  const fetchPc = async () => {
     try {
       const { docs } = await getDocs(pcsCollectionRef);
-      const allPcs = docs.map(pc => ({ id: pc.id, ...pc.data() }));
+      const allPcs = docs.map((pc) => {
+        return {
+          id: pc.id,
+          ...pc.data()
+        }
+      });
       setPcsList(allPcs);
     } catch (error) {
-      console.error(error);
-      toast.error("Failed to load PCs!");
+      console.log(error);
+      toast.error("Something Went Wrong !");
     }
   };
 
- 
+
   const deletePc = async (pcId) => {
     try {
-    
+
       const studentQuery = query(collection(db, "students"), where("pcId", "==", pcId));
       const studentSnapshot = await getDocs(studentQuery);
 
@@ -60,9 +63,9 @@ const PcContextProvider = ({ children }) => {
       });
       await batch.commit();
 
-   
+
       await deleteDoc(doc(db, "pcs", pcId));
-      loadPcs();
+      fetchPc();
       toast.success("PC deleted successfully!");
     } catch (error) {
       console.error(error);
@@ -74,7 +77,7 @@ const PcContextProvider = ({ children }) => {
   const updatePc = async (pcId, updatedData) => {
     try {
       await updateDoc(doc(db, "pcs", pcId), updatedData);
-      loadPcs();
+      fetchPc();
       toast.success("PC updated successfully!");
     } catch (error) {
       console.error(error);
@@ -93,7 +96,7 @@ const PcContextProvider = ({ children }) => {
     try {
       await updateDoc(doc(db, "pcs", pcId), { status: "In-Repair", updatedAt: new Date() });
 
-     
+
       const studentQuery = query(collection(db, "students"), where("pcId", "==", pcId));
       const studentSnapshot = await getDocs(studentQuery);
       const batch = writeBatch(db);
@@ -102,7 +105,7 @@ const PcContextProvider = ({ children }) => {
       });
       await batch.commit();
 
-      loadPcs();
+      fetchPc();
       toast.success("PC marked as In-Repair!");
     } catch (error) {
       console.error(error);
@@ -114,7 +117,7 @@ const PcContextProvider = ({ children }) => {
   const markPcAvailable = async (pcId) => {
     try {
       await updateDoc(doc(db, "pcs", pcId), { status: "Available", updatedAt: new Date() });
-      loadPcs();
+      fetchPc();
       toast.success("PC marked as Available!");
     } catch (error) {
       console.error(error);
@@ -123,21 +126,21 @@ const PcContextProvider = ({ children }) => {
   };
 
   const value = {
-    pcsList,
-     addPc,
+    pcs: pcsList,
+    addPc,
     deletePc,
     updatePc,
     getLabNameForPc,
-    loadPcs,
+    fetchPc,
     markPcInRepair,
     markPcAvailable
   };
 
   return (
-  <PcContext.Provider value={value}>
-    {children}
-  </PcContext.Provider>
+    <PcContext.Provider value={value}>
+      {children}
+    </PcContext.Provider>
   )
-} 
+}
 
 export default PcContextProvider;

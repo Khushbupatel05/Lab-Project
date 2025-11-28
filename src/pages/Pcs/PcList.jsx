@@ -5,8 +5,9 @@ import { LabContext } from "../../context/LabContextProvider";
 
 const PcList = () => {
   const navigate = useNavigate();
-  const { pcsList, deletePc, getLabNameForPc, markPcInRepair, markPcAvailable } =
+  const { pcs: pcsList = [], deletePc, getLabNameForPc, markPcInRepair, markPcAvailable } =
     useContext(PcContext);
+    
   const { labs } = useContext(LabContext);
 
   return (

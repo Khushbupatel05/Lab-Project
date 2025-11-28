@@ -1,3 +1,4 @@
+
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { LabContext } from "../../context/LabContextProvider";
@@ -12,7 +13,7 @@ const AddNewStudents = () => {
   const [filteredPc, setFilteredPc] = useState([]);
 
   const { labs } = useContext(LabContext);
-  const { pcsList } = useContext(PcContext);
+ const { pcs: pcsList } = useContext(PcContext);
   const { addStudent, updateStudent } = useContext(StudentContext);
 
   const navigate = useNavigate();
@@ -37,13 +38,18 @@ const AddNewStudents = () => {
   };
 
   useEffect(() => {
-    if (input.labId) {
-      const availablePcs = pcsList.filter(
-        (pc) => pc.labId === input.labId && pc.status.toLowerCase() === "available"
-      );
-      setFilteredPc(availablePcs);
-    }
-  }, [input.labId, pcsList]);
+  if (Array.isArray(pcsList) && input.labId) {
+    const availablePcs = pcsList.filter(
+      (pc) =>
+        pc.labId === input.labId &&
+        (pc.status.toLowerCase() === "available" || pc.id === input.pcId)
+    );
+    setFilteredPc(availablePcs);
+  } else {
+    setFilteredPc([]);
+  }
+}, [input.labId, pcsList, input.pcId]);
+
 
   const handleChange = (e) => {
     setInput({ ...input, [e.target.id]: e.target.value });

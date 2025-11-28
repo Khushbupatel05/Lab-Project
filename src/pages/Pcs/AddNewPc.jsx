@@ -13,7 +13,7 @@ const AddNewPc = () => {
   });
 
   const [isEdit, setIsEdit] = useState(false);
-  const { addPc, updatedPc } = useContext(PcContext);
+  const { addPc, updatePc } = useContext(PcContext);
   const { labs } = useContext(LabContext);
   const navigate = useNavigate();
   const { pcId } = useParams();
@@ -49,7 +49,7 @@ const AddNewPc = () => {
 
     try {
       if (isEdit) {
-        await updatedPc(pcId, input);
+        await updatePc(pcId, input);
         toast.success("PC updated successfully!");
       } else {
         await addPc(input);
